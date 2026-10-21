@@ -12,7 +12,6 @@ SERVICES = [
     "postgres",
     "pypi",
     "vault",
-    "minio",
 ]
 
 app = typer.Typer(help="Playground management CLI")
