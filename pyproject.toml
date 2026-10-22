@@ -17,5 +17,4 @@ dev = [
 members = [
     "lib/playground-cli",
     "lib/package-setup",
-    "lib/test",
 ]
