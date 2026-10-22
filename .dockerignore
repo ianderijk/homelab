@@ -1,0 +1,26 @@
+# Build context is the repo root; images only need pyproject.toml, uv.lock, lib/ and services/
+
+# VCS and tooling
+.git
+.gitignore
+.claude
+.ruff_cache
+.python-version
+justfile
+prek.toml
+
+# Secrets - never send to the build context
+mise.toml
+**/.env
+**/*.env
+
+# Local environments and caches
+.venv
+**/.venv
+**/__pycache__
+**/*.pyc
+
+# Persisted container data and logs
+data
+infra
+**/*.log

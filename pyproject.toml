@@ -5,8 +5,17 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "boto3>=1.43.118",
+    "polars>=2.0.0",
+    "sqlalchemy>=2.1.6",
     "typer>=0.27.0",
+    "data-utils",
+    "logger"
 ]
+
+[tool.uv.sources]
+data-utils = { path = "lib/data-utils", editable = true }
+logger = { path = "lib/logger", editable = true }
 
 [dependency-groups]
 dev = [
@@ -17,5 +26,5 @@ dev = [
 [tool.uv.workspace]
 members = [
     "lib/playground-cli",
-    "lib/package-setup",
+    "lib/package-setup"
 ]

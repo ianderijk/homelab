@@ -1,26 +1,22 @@
 import typer
 import os
+from playground_cli.utils import SERVICES
 from playground_cli.restore import restore_services
 from playground_cli.restart_service import restart_service
 from playground_cli.stop_service import stop_single_service, stop_all_services
 
-SERVICES = [
-    "chapflix_api",
-    "chaps_chores_api",
-    "chapflix",
-    "chaps_chores",
-    "postgres",
-    "pypi",
-    "vault",
-    "kaneo",
-]
 
 app = typer.Typer(help="Playground management CLI")
 
 
+BuildOption = typer.Option(
+    False, "--build", "-b", help="Rebuild docker images before restarting"
+)
+
+
 @app.command()
-def restore():
-    restore_services()
+def restore(build: bool = BuildOption):
+    restore_services(build=build)
 
 
 @app.command()
