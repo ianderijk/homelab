@@ -6,21 +6,12 @@ This mono-repo houses infrastructure, deployment configs and data persitence for
 
 ### Orchestration & CLI
 
-Interactions with the orchestration automation are handled via the CLI. The intended entry point for accessing the CLI by adding a wrapper function to either `~/.bashrc` or `~/.zshrc`.
+Interactions with the orchestration automation are handled via the CLI and justfile.
 
-```
-playground() {
-    local REPO_DIR="/path/to/repo"
-    "$REPO_DIR/.venv/bin/python" "$REPO_DIR/scripts/cli.py" "$@"
-}
-```
-
-Using this function means interactions with the automation scripts is as below.
-
-- Start/restart a service: `playground restart pypi`
-- Stop a service: `playground stop chapflix`
-- Stop all services: `playground stop-all`
-- Full recovery: `playground restore`
+- Start/restart a service: `just playground restart pypi`
+- Stop a service: `just playground stop chapflix`
+- Stop all services: `just playground stop-all`
+- Full recovery: `just playground restore`
 
 ### Core
 
@@ -30,7 +21,8 @@ Backend database for various apps
 
 - Version: 16
 - Volume: `/media/ianderijk/Backup/postgres-data`
-- Ports: 6543
+- Ports: 5432
+- Dependencies: N/A
 
 #### PyPi
 
@@ -39,16 +31,18 @@ Local pypi index for hosting personal tooling
 - Version: latest
 - Volume: `/home/idr/packages:/data/packages`
 - Ports: 8080
+- Dependencies: N/A
 
 ### Storage
 
-#### Minio
+#### RustFS
 
 s3 compatible object store
 
 - Version: latest
 - Volume: internal
 - Ports: 9000:9001
+- Dependencies: N/A
 
 ### Apps
 
@@ -59,12 +53,26 @@ Local media streaming app for watching cartoons on weekends
 - Version: 2.1.0
 - Volume: `home/ianderijk/Backup/Chapflix2/content`
 - Ports: 8042
+- Dependencies: Chapflix-API
 
 ### APIs
 
 #### Chapflix-API
 
 API used in Chapflix backend
-- Version 1.0.0
+
+- Version: 1.0.0
 - Volume: N/A
-- Ports 8043
+- Ports: 8043
+- Dependencies: Postgres
+
+### Project Management
+
+#### Kaneo
+
+Kanban board used to manage tickets across multiple personal projects
+
+- Version: 2.28.3
+- Volume: N/A
+- Ports: 5173
+- Dependencies: Postgres
