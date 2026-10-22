@@ -1,0 +1,39 @@
+[[repos]]
+repo = "https://github.com/pre-commit/pre-commit-hooks"
+rev = "v6.0.0"
+hooks = [
+  { id = "check-yaml" },
+  { id = "end-of-file-fixer" },
+]
+
+[[repos]]
+repo = "local"
+hooks = [
+    {
+        id = "ruff-format",
+        name = "Ruff formatting",
+        entry = "uv",
+        args = ["run", "ruff", "format"],
+        language = "system",
+        types = ["python"]
+    },
+
+    {
+        id = "ruff-lint",
+        name = "Ruff linting",
+        entry = "uv",
+        args = ["run", "ruff", "check", "--fix"],
+        language = "system",
+        types = ["python"]
+    },
+
+    {
+        id = "ty-type-check",
+        name = "Type checking",
+        entry = "uv",
+        args = ["run", "ty", "check"],
+        language = "system",
+        types = ["python"],
+        pass_filenames = false
+    }
+]

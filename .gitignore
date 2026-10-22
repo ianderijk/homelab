@@ -10,3 +10,4 @@ playground.log
 .venv
 .ruff_cache
 TODO.md
+mise.toml

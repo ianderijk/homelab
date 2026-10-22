@@ -1,8 +1,8 @@
 import typer
 import os
-from restore import restore_services
-from restart_service import restart_service
-from stop_service import stop_single_service, stop_all_services
+from playground_cli.restore import restore_services
+from playground_cli.restart_service import restart_service
+from playground_cli.stop_service import stop_single_service, stop_all_services
 
 SERVICES = [
     "chapflix_api",
@@ -12,7 +12,7 @@ SERVICES = [
     "postgres",
     "pypi",
     "vault",
-    "kaneo"
+    "kaneo",
 ]
 
 app = typer.Typer(help="Playground management CLI")

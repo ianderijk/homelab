@@ -1,8 +1,8 @@
-from utils import SERVICE_GROUPS, logger, run_command, create_services
+from playground_cli.utils import SERVICE_GROUPS, create_services, logger, run_command
 
-logger.debug("Starting playground restoration")
+logger.debug("Starting lakehouse accelerator restoration")
 
-NETWORK_NAME = "playground-net"
+NETWORK_NAME = "lakehouse-net"
 
 
 def create_docker_network() -> None:
@@ -24,34 +24,38 @@ def remove_partial_containers() -> None:
             run_command(f"docker compose -f {service.compose} down --remove-orphans")
 
 
-def launch_containers() -> None:
+def launch_containers(build: bool) -> None:
     logger.debug("Launching containers")
     for group in SERVICE_GROUPS:
         compose_files = SERVICES.get(group, [])
         for service in compose_files:
             service_name = service.compose.parent.stem
             logger.debug(f"Launching {service_name}")
-            if service.env is not None:
-                run_command(
-                    f"docker compose --env-file {service.env} -f {service.compose} up -d"
-                )
+            has_env = service.env is not None
+
+            if has_env:
+                command = f"docker compose --env-file {service.env} -f {service.compose} up -d"
             else:
-                run_command(f"docker compose -f {service.compose} up -d")
+                command = f"docker compose -f {service.compose} up -d"
+            if build:
+                command += " --build"
+
+            run_command(command)
     logger.info("Containers launched successfully")
 
 
-def restore_services() -> None:
-    logger.debug("Starting playground restoration script")
+def restore_services(build: bool = False) -> None:
+    logger.debug("Starting lakehouse accelerator restoration script")
     print("==========================================================")
-    print("           PLAYGROUND MONOREPO RESTORATION START          ")
+    print("          PLAYGROUND MONOREPO RESTORATION START           ")
     print("==========================================================")
     print("Purging partial containers...")
     remove_partial_containers()
     print("Creating docker network...")
     create_docker_network()
     print("Launching containers...")
-    launch_containers()
+    launch_containers(build)
     print("==========================================================")
-    print("         PLAYGROUND MONOREPO RESTORATION COMPLETE         ")
+    print("           PLAYGROUND MONOREPO RESTORATION STOP           ")
     print("==========================================================")
-    logger.info("Playground restored")
+    logger.info("Lakehouse restored")

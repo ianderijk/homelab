@@ -1,12 +1,13 @@
+import logging
 import os
 import subprocess
-import logging
 from pathlib import Path
 from typing import Any, NamedTuple
 
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parents[4] / "infra"
 
-logger = logging.Logger("playground", level="DEBUG")
+logger = logging.getLogger("playground")
+logger.setLevel("DEBUG")
 file_handler = logging.FileHandler(ROOT / "playground.log")
 file_handler.setLevel(logging.DEBUG)
 formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
@@ -14,14 +15,15 @@ file_handler.setFormatter(formatter)
 
 logger.addHandler(file_handler)
 
-SERVICE_GROUPS = ("core", "storage", "apis", "apps", "tickets")
 SERVICE_MAPPING = {
-    "core": ("postgres", "pypi", "vault"),
-    "storage": ("minio"),
-    "apps": ("chapflix", "chaps_chores"),
-    "apis": ("chapflix_api", "chaps_chores_api"),
-    "tickets": ("kaneo",),
+    "core": ("postgres", "pypi"),
+    "storage": ("rustfs",),
+    # "services": ("log-listener"),
+    "apis": ("chapflix_api",),
+    "apps": ("chapflix",),
 }
+SERVICE_GROUPS = SERVICE_MAPPING.keys()
+
 
 class Service(NamedTuple):
     compose: Path
@@ -30,6 +32,7 @@ class Service(NamedTuple):
 
 def run_command(command: str, check: bool = True, logger=logger) -> Any:
     logger.debug(f"Running command '{command}'...")
+    command = "mise exec -- " + command
     try:
         result = subprocess.run(
             command, shell=True, check=check, text=True, capture_output=True
