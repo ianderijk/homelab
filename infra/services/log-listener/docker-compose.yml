@@ -1,0 +1,24 @@
+name: playground
+
+services:
+  log-listener:
+    container_name: log-listener
+    build:
+      context: ../../../
+      dockerfile: services/log-listener/Dockerfile
+    ports:
+      - "9020:9020"
+    environment:
+      RUSTFS_ROOT_USER: ${RUSTFS_ROOT_USER}
+      RUSTFS_ROOT_PASSWORD: ${RUSTFS_ROOT_PASSWORD}
+      RUSTFS_ENDPOINT: http://rustfs:9000
+    networks:
+      - playground-net
+    restart: always
+
+networks:
+  playground-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24

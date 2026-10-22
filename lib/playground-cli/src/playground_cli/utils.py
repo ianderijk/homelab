@@ -18,11 +18,13 @@ logger.addHandler(file_handler)
 SERVICE_MAPPING = {
     "core": ("postgres", "pypi"),
     "storage": ("rustfs",),
-    # "services": ("log-listener"),
+    "services": ("log-listener"),
     "apis": ("chapflix_api",),
     "apps": ("chapflix",),
+    "tickets": ("kaneo",),
 }
 SERVICE_GROUPS = SERVICE_MAPPING.keys()
+SERVICES = [service for services in SERVICE_MAPPING.values() for service in services]
 
 
 class Service(NamedTuple):
