@@ -1,0 +1,28 @@
+name: playground
+
+services:
+  rustfs:
+    image: rustfs/rustfs:latest
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      RUSTFS_ACCESS_KEY: ${RUSTFS_ROOT_USER}
+      RUSTFS_SECRET_KEY: ${RUSTFS_ROOT_PASSWORD}
+      HOST: 0.0.0.0
+    volumes:
+      - ${RUSTFS_VOLUME:-rustfs_data}:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - playground-net
+    restart: always
+
+networks:
+  playground-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+
+volumes:
+  rustfs_data:

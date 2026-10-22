@@ -1,6 +1,13 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.12"
+
+[manifest]
+members = [
+    "package-setup",
+    "playground",
+    "playground-cli",
+]
 
 [[package]]
 name = "annotated-doc"
@@ -42,6 +49,11 @@ wheels = [
 ]
 
 [[package]]
+name = "package-setup"
+version = "0.1.0"
+source = { editable = "lib/package-setup" }
+
+[[package]]
 name = "playground"
 version = "0.1.0"
 source = { virtual = "." }
@@ -59,6 +71,11 @@ requires-dist = [{ name = "typer", specifier = ">=0.27.0" }]
 
 [package.metadata.requires-dev]
 dev = [{ name = "ruff", specifier = ">=0.15.22" }]
+
+[[package]]
+name = "playground-cli"
+version = "0.1.0"
+source = { editable = "lib/playground-cli" }
 
 [[package]]
 name = "pygments"

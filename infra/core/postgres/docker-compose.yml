@@ -6,7 +6,7 @@ services:
     container_name: playground-postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${PASSWORD}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: chapflix
     command: ["postgres", "-c", "listen_addresses=*"]
     healthcheck:

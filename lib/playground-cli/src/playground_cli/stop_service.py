@@ -1,4 +1,10 @@
-from utils import ROOT, SERVICE_MAPPING, run_command, logger, create_services
+from playground_cli.utils import (
+    ROOT,
+    SERVICE_MAPPING,
+    create_services,
+    logger,
+    run_command,
+)
 
 
 def stop_single_service(service: str) -> None:
