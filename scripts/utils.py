@@ -14,12 +14,13 @@ file_handler.setFormatter(formatter)
 
 logger.addHandler(file_handler)
 
-SERVICE_GROUPS = ("core", "storage", "apis", "apps")
+SERVICE_GROUPS = ("core", "storage", "apis", "apps", "tickets")
 SERVICE_MAPPING = {
     "core": ("postgres", "pypi", "vault"),
     "storage": ("minio"),
     "apps": ("chapflix", "chaps_chores"),
     "apis": ("chapflix_api", "chaps_chores_api"),
+    "tickets": ("kaneo",),
 }
 
 class Service(NamedTuple):
