@@ -5,9 +5,9 @@ services:
     image: ghcr.io/usekaneo/kaneo:2.28.3
     restart: unless-stopped
     environment:
-      - DATABASE_URL=${POSTGRES_URL_KANEO}
-      - KANEO_CLIENT_URL=${KANEO_CLIENT_URL}
-      - AUTH_SECRET=${KANEO_AUTH_SECRET}
+      - DATABASE_URL=${POSTGRES_URL_KANEO:?POSTGRES_URL_KANEO is not set - is mise active?}
+      - KANEO_CLIENT_URL=${KANEO_CLIENT_URL:?KANEO_CLIENT_URL is not set - is mise active?}
+      - AUTH_SECRET=${KANEO_AUTH_SECRET:?KANEO_AUTH_SECRET is not set - is mise active?}
     healthcheck:
       test: ["CMD", "wget", "-Y", "off", "--quiet", "--spider", "http://127.0.0.1:5173/api/health"]
       interval: 30s
