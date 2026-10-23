@@ -9,7 +9,7 @@ services:
     ports:
       - "8043:8043"
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${PYTHON_POSTGRES_URL}
       HOST: 0.0.0.0
     networks:
       - playground-net

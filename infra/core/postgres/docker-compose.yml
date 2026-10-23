@@ -10,7 +10,7 @@ services:
       POSTGRES_DB: chapflix
     command: ["postgres", "-c", "listen_addresses=*"]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d chapflix"]
+      test: ["CMD-SHELL", "pg_isready -U $${{POSTGRES_USER}} -d chapflix"]
       interval: 5s
       timeout: 15s
       retries: 2

@@ -11,7 +11,7 @@ services:
     environment:
       CHAPFLIX_API_URL: http://chapflix2-api-container:8043/
       MEDIA_FILES: ${MEDIA_FILES}
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${PYTHON_POSTGRES_URL}
       PYTHONUNBUFFERED: 1
       HOST: 0.0.0.0
     volumes:
