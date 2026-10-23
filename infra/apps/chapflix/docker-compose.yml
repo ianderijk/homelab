@@ -10,7 +10,7 @@ services:
       - "8042:8042"
     environment:
       CHAPFLIX_API_URL: http://chapflix2-api-container:8043/
-      CHAPFLIX_MEDIA_FILES: ${MEDIA_FILES}
+      MEDIA_FILES: ${MEDIA_FILES}
       DATABASE_URL: ${DATABASE_URL}
       PYTHONUNBUFFERED: 1
       HOST: 0.0.0.0
