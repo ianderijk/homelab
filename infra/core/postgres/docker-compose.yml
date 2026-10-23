@@ -17,7 +17,7 @@ services:
     volumes:
       - ${POSTGRES_VOLUME}:/var/lib/postgresql/data
     ports:
-      - "6543:5432"
+      - "5432:5432"
     networks:
       - playground-net
     restart: always
