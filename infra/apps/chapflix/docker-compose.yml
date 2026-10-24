@@ -4,18 +4,18 @@ services:
   chapflix:
     container_name: chapflix2-container
     build:
-      context: /media/idr/ExtDrive/Chapflix2
-      dockerfile: /media/idr/ExtDrive/Chapflix2/infra/docker/Dockerfile.app
+      context: ${CHAPFLIX_IMAGE_CONTEXT}
+      dockerfile: ${CHAPFLIX_APP_IMAGE}
     ports:
       - "8042:8042"
     environment:
       CHAPFLIX_API_URL: http://chapflix2-api-container:8043/
       MEDIA_FILES: ${MEDIA_FILES}
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${POSTGRES_PYTHON_URL}
       PYTHONUNBUFFERED: 1
       HOST: 0.0.0.0
     volumes:
-      - /media/idr/ExtDrive/Chapflix2/content:/app/content
+      - ${CHAPFLIX_IMAGE_VOLUME}
     networks:
       - playground-net
     restart: unless-stopped
