@@ -24,7 +24,7 @@ setup-dirs:
     @echo 'Created directories'
 
 # Run the lakehouse CLI
-playground +args='--help':
+homelab +args='--help':
     uv run ./lib/playground-cli/src/playground_cli/cli.py {{ args }}
 
 # Initialize package setup
@@ -37,7 +37,7 @@ build name:
 
 # Publish built package to the private index
 publish name:
-    uv publish ./lib/{{ name }}/dist/* --index lakehouse-index --username user --password password
+    uv publish ./lib/{{ name }}/dist/* --index homelab-index --username user --password password
 
 # Install a package dependency from the private package index
 install name:
