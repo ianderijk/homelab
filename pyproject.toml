@@ -1,5 +1,5 @@
 [project]
-name = "playground"
+name = "homelab"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -26,5 +26,5 @@ dev = [
 [tool.uv.workspace]
 members = [
     "lib/playground-cli",
-    "lib/package-setup"
+    "lib/package-setup",
 ]

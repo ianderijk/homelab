@@ -1,4 +1,4 @@
-# Playground
+# Homelab
 
 This mono-repo houses infrastructure, deployment configs and data persitence for various self-hosted personal apps and their dependencies. Everything is managed using Docker Compose and orchestrated with a python CLI automating setup, teardown and disaster recovery.
 
@@ -8,10 +8,10 @@ This mono-repo houses infrastructure, deployment configs and data persitence for
 
 Interactions with the orchestration automation are handled via the CLI and justfile.
 
-- Start/restart a service: `just playground restart pypi`
-- Stop a service: `just playground stop chapflix`
-- Stop all services: `just playground stop-all`
-- Full recovery: `just playground restore`
+- Start/restart a service: `just homelab restart pypi`
+- Stop a service: `just homelab stop chapflix`
+- Stop all services: `just homelab stop-all`
+- Full recovery: `just homelab restore`
 
 ### Core
 
